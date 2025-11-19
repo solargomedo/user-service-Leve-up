@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,20 +17,16 @@ public class Usuario {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(unique=true, length = 13, nullable = false)
-  private String run;
-
-  @Column(nullable=false)
+  @Column(nullable = false)
   private String nombre;
 
-  @Column(nullable=false)
-  private String apellido;
-
-  @Column(nullable=false)
+  @Column(nullable = false, unique = true)
   private String correo;
 
-  
+  @Column(nullable = false)
+  private String password;
 
-
+  @Column(nullable = false)
+  private Integer edad;
 
 }
