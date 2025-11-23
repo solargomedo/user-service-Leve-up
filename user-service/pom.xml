@@ -19,12 +19,11 @@
     <description>registro de ventas</description>
 
     <properties>
-			<java.version>17</java.version>
-			<lombok.version>1.18.32</lombok.version>
-	</properties>
-	
-    <dependencies>
+        <java.version>17</java.version>
+        <lombok.version>1.18.32</lombok.version>
+    </properties>
 
+    <dependencies>
         <!-- JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,11 +64,32 @@
             <version>2.6.0</version>
         </dependency>
 
+        <!-- Security + JWT -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
             <!-- Plugin compilador -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -82,7 +102,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-							<version>${lombok.version}</version>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -101,7 +121,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 

@@ -1,5 +1,8 @@
 package com.ecomarket.user_service.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,5 +31,10 @@ public class Usuario {
 
   @Column(nullable = false)
   private Integer edad;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"))
+  @Column(name = "rol")
+  private List<String> roles = new ArrayList<>();
 
 }
