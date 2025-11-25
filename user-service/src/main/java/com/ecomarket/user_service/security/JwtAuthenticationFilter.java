@@ -17,11 +17,22 @@ import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
+
+        String path = request.getServletPath();
+
+        // NO PASAN POR JWT
+        if (path.startsWith("/api/v1/auth")
+                || path.startsWith("/api/v1/usuarios/register")
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-ui")) {
+
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String authHeader = request.getHeader("Authorization");
 
@@ -33,7 +44,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String correo = claims.getSubject();
                 List<String> roles = claims.get("roles", List.class);
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(correo,
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        correo,
                         null,
                         roles.stream()
                                 .map(r -> new org.springframework.security.core.authority.SimpleGrantedAuthority(r))
@@ -49,4 +61,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+
 }

@@ -19,7 +19,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // LISTAR TODOS
+    // LISTAR
     @GetMapping
     public ResponseEntity<List<Usuario>> listar() {
         List<Usuario> usuarios = usuarioService.findAll();
@@ -29,7 +29,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
-    // CREAR (si quieres mantenerlo separado del registro)
+    // CREAR
     @PostMapping
     public ResponseEntity<Usuario> crear(@RequestBody Usuario usuario) {
         Usuario usuarioNuevo = usuarioService.save(usuario);
@@ -73,7 +73,7 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    // REGISTRO + JWT
+    // REGISTRO USUARIO
     @PostMapping("/register")
     public ResponseEntity<?> registrar(@RequestBody Usuario usuario) {
         usuario.setRoles(List.of("ROLE_USER")); // rol por defecto
